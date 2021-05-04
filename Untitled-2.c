@@ -22,7 +22,7 @@ saddr.sinfamily = AF_INET;
 saddr.sinaddr.s_addr = htonl(INADDR_ANY);
 saddr.sinport = htons(port);
 
-    if (bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0){
+    if (bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
         printf("Cannot Bind, oops\n");
         exit(1);
     }
@@ -33,7 +33,7 @@ saddr.sinport = htons(port);
     }
 
     clen=sizeof(caddr);
-    if ((clientfd = accept(sockfd, (struct sockaddr *) &caddr, &clen)) < 0){
+    if ((clientfd = accept(sockfd, (struct sockaddr *) &caddr, &clen)) < 0) {
         printf("Cannot accept the connection\n");
         exit(1);
     }
