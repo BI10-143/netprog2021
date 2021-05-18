@@ -11,38 +11,38 @@
 int main(int argc, char **argv) {
     struct hostent *dell;
     if (argc < 2) {
-      char hostname[1000];
-      printf("Please enter the hostname: ");
-      fgets(hostname, sizeof(hostname), stdin);
-      dell = gethostbyname(hostname);
+      	char hostname[1000];
+      	printf("Please enter the hostname: ");
+      	fgets(hostname, sizeof(hostname), stdin);
+      	dell = gethostbyname(hostname);
     }
     else {
-      dell = gethostbyname(argv[1]);
+      	dell = gethostbyname(argv[1]);
     }
 
     if (dell == NULL) {
-       printf("Failed to connect\n");
+       	printf("Failed to connect\n");
     } else {
-       printf("%s: ", dell->h_name);
-       unsigned int i=0;
-       while ( dell -> h_addr_list[i] != NULL) {
-          printf( "%s\n ", inet_ntoa( *( struct in_addr*)( dell -> h_addr_list[i])));
-          i++;
-       }
-       printf("\n");
+    	printf("%s: ", dell->h_name);
+       	unsigned int i=0;
+       	while ( dell -> h_addr_list[i] != NULL) {
+          	printf( "%s\n ", inet_ntoa( *( struct in_addr*)( dell -> h_addr_list[i])));
+          	i++;
+       	}
+       	printf("\n");
     }
 
     int sockfd;
     if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
-      printf("Error creating socket sad\n");
-      exit(1);
+      	printf("Error creating socket sad\n");
+      	exit(1);
     }
   
     struct sockaddr_in saddr;
     memset(&saddr, 0, sizeof(saddr));
-    saddr.sin__family = AF_INET;
+    saddr.sinfamily = AF_INET;
     memcpy((char *) &saddr.sin__addr.s_addr, dell->h_addr_list[0], dell->h_length);
-    saddr.sin__port = htons(8785);
+    saddr.sinport = htons(8785);
     if (connect(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
         printf("Cannot connect sadly\n");
         perror("Connect");
@@ -57,8 +57,8 @@ int main(int argc, char **argv) {
         write(sockfd, sc, strlen(sc));
 
         read(sockfd, s, 500);
-        sc[strlen(sc) -1] = 0
-        printf("Sever>> %s\n", sc);
+        sc[strlen(sc) -1] = 0;
+        printf("Server>> %s\n", sc);
     }
 
 }

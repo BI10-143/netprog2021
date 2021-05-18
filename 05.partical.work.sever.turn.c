@@ -15,8 +15,8 @@ int main(int argc, char const *agrv[]){
 
     if (sockfd < 0) 
     {
-      printf("Cannot create the requested socket\n");
-      exit(1);
+      	printf("Cannot create the requested socket\n");
+      	exit(1);
     }
 
 memset(&saddr, 0, sizeof(saddr));
@@ -49,11 +49,11 @@ saddr.sinport = htons(port);
         sc[strlen(sc) -1] = 0
         printf("Client>> %s\n", sc);
 
-        printf("Sever>>");
+        printf("Server>>");
         fgets(sc, 500, stdin);
         write(sockfd, sc, strlen(sc));
 
     }
 
-return 1;
+	return 1;
 }
