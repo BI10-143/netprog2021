@@ -40,7 +40,7 @@ int main(int argc, char **argv) {
   
     struct sockaddr_in saddr;
     memset(&saddr, 0, sizeof(saddr));
-    saddr.sinfamily = AF_INET;
+    saddr.sin_family = AF_INET;
     memcpy((char *) &saddr.sin__addr.s_addr, dell->h_addr_list[0], dell->h_length);
     saddr.sinport = htons(8785);
     if (connect(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0) {
@@ -70,11 +70,11 @@ void chat(int sockfd){
 
     while(1){   
         bzero(buff, sizeof(buff)); 
-        printf("Server">> ");
+        printf("Server>> ");
         fgets(buff, sizeof(buff), stdin);
         send(sockfd, &buff[n], sizeof(buff), 0);
         
-        if(strncmp("Exit", buff, 2) == 0) { 
+        if(strncmp("Exit", buff, 2) == 0){ 
             printf("Server Exiting...\n"); 
             break; 
         }
@@ -85,11 +85,10 @@ void chat(int sockfd){
         while(strcmp(&buff[n], delimiter) != 0){
             recv(sockfd, &buff[n], sizeof(buff[n]), 0); 
             printf("%c", buff[n]);
-
             strcat(msg, &buff[n]);
         }
 
-        if(strncmp("Exit", msg, 4) == 0) { 
+        if(strncmp("Exit", msg, 4) == 0){ 
             printf("Server Exiting...exit\n"); 
             break; 
         }

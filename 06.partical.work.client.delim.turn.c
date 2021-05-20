@@ -69,7 +69,7 @@ void chat(int sockfd){
         fgets(buff, sizeof(buff), stdin);
         send(sockfd, &buff[n], sizeof(buff), 0);
         
-        if(strncmp("Exit", buff, 2) == 0) { 
+        if(strncmp("Exit", buff, 2) == 0){ 
             printf("Client Exiting...\n"); 
             break; 
         }
@@ -80,11 +80,10 @@ void chat(int sockfd){
         while(strcmp(&buff[n], delimiter) != 0){
             recv(sockfd, &buff[n], sizeof(buff[n]), 0); 
             printf("%c", buff[n]);
-
             strcat(msg, &buff[n]);
         }
 
-        if(strncmp("Exit", msg, 4) == 0) { 
+        if(strncmp("Exit", msg, 4) == 0){ 
             printf("Client Exiting...exit\n"); 
             break; 
         }
