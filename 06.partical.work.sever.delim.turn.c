@@ -49,24 +49,11 @@ int main(int argc, char **argv) {
     }
     printf("Successfully connected to server. Have fun!\n");
 
-    while (1) {
-        char sc[500];
-        memset(sc, 0, 500);
-        printf("Client>>");
-        fgets(sc, 500, stdin);
-        write(sockfd, sc, strlen(sc));
-
-        read(sockfd, s, 500);
-        sc[strlen(sc) -1] = 0;
-        printf("Server>> %s\n", sc);
-    }
-
-}
 void chat(int sockfd){ 
-    char buff[500]; 
-    char msg[500] = ""; 
-    char delimiter[2] = "\n"; 
-    int n = 0; 
+char buff[500]; 
+char msg[500] = ""; 
+char delimiter[2] = "\n"; 
+int n = 0; 
 
     while(1){   
         bzero(buff, sizeof(buff)); 
@@ -94,3 +81,4 @@ void chat(int sockfd){
         }
     } 
 } 
+}

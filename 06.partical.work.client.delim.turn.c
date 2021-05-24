@@ -40,24 +40,7 @@ saddr.sinport = htons(port);
         exit(1);
     }
 
-    printf("Accepted! Thank you!\n");
-    while (1) {
-        char sc[500];
-        memset(sc, 0, 500);
-        read(sockfd, s, 500);
-        sc[strlen(sc) -1] = 0
-        printf("Client>> %s\n", sc);
-
-        printf("Server>>");
-        fgets(sc, 500, stdin);
-        write(sockfd, sc, strlen(sc));
-
-    }
-
-	return 1;
-}
-
-void chat(int sockfd){ 
+    void chat(int sockfd){ 
     char buff[500]; 
     char msg[500] = ""; 
     char delimiter[2] = "\n"; 
@@ -89,3 +72,5 @@ void chat(int sockfd){
         }
     } 
 } 
+}
+
