@@ -45,12 +45,21 @@ saddr.sin_port = htons(port);
     while (1) {
         char sc[500];
         memset(sc, 0, 500);
-        read(sockfd, s, 500);
-        sc[strlen(sc) -1] = 0
+        if (read(sockfd, s, 500) <= 0);{
+            printf("Client got disconnected...\n");
+            break;
+        }
         printf("Client>> %s\n", sc);
 
         printf("Server>>");
         fgets(sc, 500, stdin);
+        sc[strlen(sc) - 1] = 0;
+        if (strcmp(sc, "/dc") == 0) {
+	      	shutdown(clientfd, SHUT_RDWR);
+	      	close(clientfd);
+	      	printf("Disconnect to the Client...\n");
+	      	break;
+        }
         write(sockfd, sc, strlen(sc));
 
     }

@@ -52,13 +52,20 @@ int main(int argc, char **argv) {
     while (1) {
         char sc[500];
         memset(sc, 0, 500);
-        printf("Client>>");
+        printf("Client>>\n");
         fgets(sc, 500, stdin);
+        sc[strlen(sc, "/quit") - 1] = 0;
+        if (strcmp(sc) == 0) {
+	      	shutdown(sockfd, SHUT_RDWR);
+	      	close(sockfd);
+	      	break;
+    }
         write(sockfd, sc, strlen(sc));
 
-        read(sockfd, s, 500);
-        sc[strlen(sc) -1] = 0;
-        printf("Server>> %s\n", sc);
-    }
+        if(read(sockfd, s, 500) <= 0){
+            printf("Server has disconnected %s\n", sc);
+            break;
+        }
+        print("Server>>\n", sc);
 
 }
