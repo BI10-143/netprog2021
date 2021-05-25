@@ -19,9 +19,9 @@ int main(int argc, char const *agrv[]){
     }
 
 memset(&saddr, 0, sizeof(saddr));
-saddr.sinfamily = AF_INET;
-saddr.sinaddr.s_addr = htonl(INADDR_ANY);
-saddr.sinport = htons(port);
+saddr.sin_family = AF_INET;
+saddr.sin_addr.s_addr = htonl(INADDR_ANY);
+saddr.sin_port = htons(port);
 
     if (bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0){
         printf("Cannot Bind, oops\n");

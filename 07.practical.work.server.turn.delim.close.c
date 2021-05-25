@@ -60,7 +60,7 @@ saddr.sin_port = htons(port);
 	      	printf("Disconnect to the Client...\n");
 	      	break;
         }
-        write(sockfd, sc, strlen(sc));
+        write(clientfd, sc, strlen(sc));
 
     }
 

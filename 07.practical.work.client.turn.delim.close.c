@@ -54,12 +54,12 @@ int main(int argc, char **argv) {
         memset(sc, 0, 500);
         printf("Client>>\n");
         fgets(sc, 500, stdin);
-        sc[strlen(sc, "/quit") - 1] = 0;
-        if (strcmp(sc) == 0) {
+        sc[strlen(sc) - 1] == 0;
+        if (strcmp(sc, "/quit") == 0) {
 	      	shutdown(sockfd, SHUT_RDWR);
 	      	close(sockfd);
-	      	break;
-    }
+	      	exit(0);
+        }
         write(sockfd, sc, strlen(sc));
 
         if(read(sockfd, s, 500) <= 0){
@@ -68,4 +68,5 @@ int main(int argc, char **argv) {
         }
         print("Server>>\n", sc);
 
+    }
 }
