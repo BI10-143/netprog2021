@@ -14,7 +14,7 @@ int main(int argc, char const *agrv[]){
 	unsigned short port = 8785;
     sockfd = socket(AF_INET, SOCK_STREAM, 0);
 
-    if (sockfd < 0) {
+    if (sockfd < 0){
       	printf("Cannot create the requested socket\n");
       	exit(1);
     }
@@ -23,10 +23,10 @@ int main(int argc, char const *agrv[]){
 	fl |= O_NONBLOCK;
 	fcntl(sockfd, F_SETFL, fl);
 
-memset(&saddr, 0, sizeof(saddr));
-saddr.sin_family = AF_INET;
-saddr.sin_addr.s_addr = htonl(INADDR_ANY);
-saddr.sin_port = htons(port);
+	memset(&saddr, 0, sizeof(saddr));
+	saddr.sin_family = AF_INET;
+	saddr.sin_addr.s_addr = htonl(INADDR_ANY);
+	saddr.sin_port = htons(port);
 
     if (bind(sockfd, (struct sockaddr *) &saddr, sizeof(saddr)) < 0){
         printf("Cannot Bind, oops\n");
@@ -34,7 +34,7 @@ saddr.sin_port = htons(port);
         exit(1);
     }
 
-    if (listen(sockfd, 5) < 0) {
+    if (listen(sockfd, 5) < 0){
         printf("Cannot Listen\n");
         exit(1);
     }
@@ -45,19 +45,19 @@ saddr.sin_port = htons(port);
 		fl |= O_NONBLOCK;
 		fcntl(clientfd, F_SETFL, fl);
 		printf("Successfully reached to Client\n");
-            while (1) {
-				char sc[500];
-				memset(sc, 0, 500);
-				if (read(clientfd, sc, 500) > 0) {
-					printf("Client>> %s\n", sc);
-				}
-				struct pollfd input[1] = {{.fd = 0, .events = POLLIN}};
-				if (poll(input, 1, 300) > 0) {
-		      		fgets(sc, 500, stdin);
-			      	sc[strlen(sc) - 1] = 0;
-			      	write(clientfd, sc, strlen(sc));
-			    }
+        while (1) {
+			char sc[500];
+			memset(sc, 0, 500);
+			if (read(clientfd, sc, 500) > 0) {
+				printf("Client>> %s\n", sc);
 			}
+			struct pollfd input[1] = {{.fd = 0, .events = POLLIN}};
+			if (poll(input, 1, 300) > 0) {
+		      	fgets(sc, 500, stdin);
+			    sc[strlen(sc) - 1] = 0;
+			    write(clientfd, sc, strlen(sc));
+			}
+		}
     }      
 	return 1;
 }

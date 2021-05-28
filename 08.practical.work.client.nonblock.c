@@ -16,7 +16,7 @@ int main(int argc, char **argv) {
       	fgets(hostname, sizeof(hostname), stdin);
       	dell = gethostbyname(hostname);
     }
-    else {
+    else{
       	dell = gethostbyname(argv[1]);
     }
 
@@ -33,7 +33,7 @@ int main(int argc, char **argv) {
     }
 
     int sockfd;
-    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0) {
+    if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) < 0){
       	printf("Error creating socket sad\n");
       	exit(1);
     }
@@ -60,12 +60,10 @@ int main(int argc, char **argv) {
 	      	print("Server>>\n", sc);
         }
         struct pollfd input[1] = {{.fd = 0, .events = POLLIN}};
-			if (poll(input, 1, 300) > 0) {
-		    	fgets(sc, 500, stdin);
-			  	sc[strlen(sc) - 1] = 0;
-			  	write(clientfd, sc, strlen(sc));
-			    }
-        
-
+		if (poll(input, 1, 300) > 0) {
+			fgets(sc, 500, stdin);
+		  	sc[strlen(sc) - 1] = 0;
+		  	write(clientfd, sc, strlen(sc));
+	    }
     }
 }
